@@ -1,11 +1,15 @@
 package com.puravida
 
+import com.puravida.griffon.dnie.LoginModel
 import griffon.core.GriffonApplication
+import griffon.core.ShutdownHandler
 import griffon.core.artifact.GriffonController
 import griffon.metadata.ArtifactProviderFor
 
+import javax.annotation.Nonnull
+
 @ArtifactProviderFor(GriffonController)
-class GriffdniController {
+class GriffdniController implements ShutdownHandler{
 
     GriffdniModel model
 
@@ -13,28 +17,37 @@ class GriffdniController {
 
     GriffonApplication application
 
+    void mvcGroupInit(Map<String, Object> args) {
+        application.addShutdownHandler(this)
+    }
+
+    boolean canShutdown(@Nonnull GriffonApplication application){
+        return model.nif == null
+    }
+
+    void onShutdown(@Nonnull GriffonApplication application){
+
+    }
+
     void login() {
-        withMVCGroup('login') { groupAware ->
-            def loginController = groupAware.controller
-            def loginModel = groupAware.model
-            loginController.doLogin()
-            if (loginModel.serialnumber) {
-                model.nif = loginModel.serialnumber
-                model.name = "$loginModel.givenname, $loginModel.surname"
-            }
-        }
-        try{
-            destroyMVCGroup('rest')
-        }catch(e){
-        }
-        if( model.nif ){
-            createMVC('rest', [nif:model.nif])
+        withMVC 'login', { loginModel, loginView, loginController ->
+          loginController.doLogin()
+          if (loginModel.serialnumber) {
+              model.nif = loginModel.serialnumber
+              model.name = "$loginModel.givenname, $loginModel.surname"
+              createMVC('rest', [nif:model.nif])
+              createMVC('agreement', [nif:model.nif])
+          }
         }
     }
 
     void logout(){
-        destroyMVCGroup('rest')
-        model.nif = null
+        try{
+            destroyMVCGroup('rest')
+            destroyMVCGroup('agreement')
+            model.nif = null
+        }catch(e){
+        }
     }
 
     void sign() {

@@ -80,6 +80,10 @@ dependencies {
     compile 'org.bouncycastle:bcprov-jdk15on:1.54'
     compile 'org.bouncycastle:bcmail-jdk15on:1.54'
     compile 'org.apache.pdfbox:pdfbox:2.0.1'
+    compile group: 'org.swinglabs', name: 'pdf-renderer', version: '1.0.5'
+
+
+
 
 }
 

@@ -8,8 +8,12 @@ import java.awt.*
 
 @ArtifactProviderFor(GriffonView)
 class GriffdniView {
+
     FactoryBuilderSupport builder
+
     GriffdniModel model
+
+    def tabPanel
 
     void initUI() {
         builder.with {
@@ -21,12 +25,7 @@ class GriffdniView {
                         iconImage: imageIcon('/griffon-icon-48x48.png').image,
                         iconImages: [imageIcon('/griffon-icon-48x48.png').image,
                                      imageIcon('/griffon-icon-32x32.png').image,
-                                     imageIcon('/griffon-icon-16x16.png').image],
-                        windowClosing: { evt ->
-                            if (!model.dirty) {
-                                app.shutdown()
-                            }
-                        }
+                                     imageIcon('/griffon-icon-16x16.png').image]
                 ) {
 
                     panel() {
@@ -63,10 +62,8 @@ class GriffdniView {
                             }
                         }
 
-                        panel( id:'centerPanel', constraints: CENTER ) {
-                            borderLayout()
+                        tabbedPane( id:'centerPanel', constraints: CENTER ) {
 
-                            label text:"hola"
                         }
 
                         panel( constraints: SOUTH){

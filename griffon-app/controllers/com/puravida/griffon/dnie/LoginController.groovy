@@ -28,8 +28,6 @@ class LoginController {
 
     LoginView view
 
-    GriffonApplication application
-
     void mvcGroupInit(Map<String, Object> args) {
         model.instrucctions = 'Inserte su DNIe en el lector y pulse el botón "Login"'
     }
@@ -48,9 +46,6 @@ class LoginController {
         }
 
         try {
-            Provider provider = new DnieProvider(new SmartcardIoConnection())
-            Security.addProvider(provider)
-
             final KeyStore ks = KeyStore.getInstance('DNI')
 
             final CallbackHandler callbackHandler
@@ -81,10 +76,10 @@ class LoginController {
 
                 //////////////////////////////
                 /* firmar usando certificado autentificacion
-                Path source = Paths.get('/home/jorge/Descargas/recibo_luz.pdf');
-        Path destination = Paths.get('/home/jorge/Descargas/recibo_luz_signed.pdf');
+                Path source = Paths.get('/home/jorge/Descargas/recibo_luz.agreement');
+        Path destination = Paths.get('/home/jorge/Descargas/recibo_luz_signed.agreement');
         Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING)
-        final PDDocument doc = PDDocument.load(new File('/home/jorge/Descargas/recibo_luz_signed.pdf'))
+        final PDDocument doc = PDDocument.load(new File('/home/jorge/Descargas/recibo_luz_signed.agreement'))
         final PDSignature signature = new PDSignature()
 
         signature.filter = PDSignature.FILTER_ADOBE_PPKLITE
@@ -113,7 +108,7 @@ class LoginController {
                 return signedData.encoded
             }
         });
-        FileOutputStream fos = new FileOutputStream('/home/jorge/Descargas/recibo_luz_signed.pdf')
+        FileOutputStream fos = new FileOutputStream('/home/jorge/Descargas/recibo_luz_signed.agreement')
         doc.saveIncremental(fos);
                 */
 

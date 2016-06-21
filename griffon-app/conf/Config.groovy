@@ -27,6 +27,12 @@ mvcGroups {
         view       = 'com.puravida.griffon.rest.RestView'
         controller = 'com.puravida.griffon.rest.RestController'
     }
+
+    'agreement' {
+        model      = 'com.puravida.griffon.agreement.AgreementModel'
+        view       = 'com.puravida.griffon.agreement.AgreementView'
+        controller = 'com.puravida.griffon.agreement.AgreementController'
+    }
 }
 
 windowManager {

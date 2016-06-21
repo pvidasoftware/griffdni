@@ -1,12 +1,12 @@
 package com.puravida.griffon.rest
 
+import griffon.core.artifact.GriffonController
+
 /**
  * Created by jorge on 17/06/16.
  */
-import griffon.core.artifact.GriffonController
 import griffon.metadata.ArtifactProviderFor
 import griffon.plugins.wslite.WsliteHandler
-import wslite.http.HTTPClientException
 import wslite.rest.ContentType
 import wslite.rest.RESTClient
 import wslite.rest.Response
