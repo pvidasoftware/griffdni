@@ -1,6 +1,8 @@
 package com.puravida.griffon.agreement
 
+import com.puravida.GriffdniController
 import com.puravida.griffon.dnie.CMSProcessableInputStream
+import com.puravida.griffon.dnie.DnieService
 import es.gob.jmulticard.jse.provider.DnieProvider
 import es.gob.jmulticard.jse.smartcardio.SmartcardIoConnection
 import es.gob.jmulticard.ui.passwordcallback.PasswordCallbackManager
@@ -45,70 +47,26 @@ import java.security.cert.Certificate
 class AgreementController {
 
     AgreementModel model
+
     AgreementView view
 
-    void mvcGroupInit(Map<String, Object> args) {
-        runInsideUIAsync{
-            view.showPage(1)
-        }
-    }
+    GriffdniController parentController
 
+    @javax.inject.Inject
+    private DnieService dnieService
+
+    void mvcGroupInit(Map<String, Object> args) {
+    }
 
     void signAgreement(){
 
-        final KeyStore ks = KeyStore.getInstance('DNI')
-        final CallbackHandler callbackHandler
-        PasswordCallbackManager.setDialogOwner(view.builder.mainPanel)
-        callbackHandler = new DnieCallbackHandler()
+        try {
+            dnieService.signPdf(model.dnie, new File(model.file), new File(model.fileSigned))
+            view.showSuccess()
+            parentController.agreementSigned()
+        }catch( e ){
+            view.showError(e.toString())
+        }
 
-        final KeyStore.LoadStoreParameter lsp = new KeyStore.LoadStoreParameter() {
-            @Override
-            public KeyStore.ProtectionParameter getProtectionParameter() {
-                return new KeyStore.CallbackHandlerProtection(callbackHandler)
-            }
-        };
-
-        ks.load(lsp)
-
-        final Certificate certificate = ks.getCertificate('CertAutenticacion')
-        final PrivateKey privateKey = (PrivateKey) ks.getKey('CertAutenticacion', null);
-        final Certificate[] chain = ks.getCertificateChain('CertAutenticacion');
-
-
-        Path source = Paths.get(model.file);
-        Path destination = Paths.get(model.fileSigned);
-        Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING)
-
-        final PDDocument doc = PDDocument.load(new File(model.fileSigned))
-        final PDSignature signature = new PDSignature()
-
-        signature.filter = PDSignature.FILTER_ADOBE_PPKLITE
-        signature.subFilter = PDSignature.SUBFILTER_ADBE_PKCS7_DETACHED
-        signature.signDate = Calendar.instance
-
-        doc.addSignature(signature, new SignatureInterface() {
-            @Override
-            byte[] sign(InputStream content) throws IOException {
-                List<Certificate> certList = [certificate]
-                Store certs = new JcaCertStore(certList)
-                CMSSignedDataGenerator gen = new CMSSignedDataGenerator();
-                org.bouncycastle.asn1.x509.Certificate cert =
-                        org.bouncycastle.asn1.x509.Certificate.getInstance(
-                                ASN1Primitive.fromByteArray(certificate.getEncoded()));
-
-                ContentSigner sha1Signer = new JcaContentSignerBuilder("SHA256WithRSA").build(privateKey);
-                gen.addSignerInfoGenerator(
-                        new JcaSignerInfoGeneratorBuilder(
-                                new JcaDigestCalculatorProviderBuilder().build()).
-                                build(sha1Signer, new X509CertificateHolder(cert)));
-                gen.addCertificates(certs);
-                CMSProcessableInputStream msg = new CMSProcessableInputStream(content);
-                CMSSignedData signedData = gen.generate(msg, false);
-
-                return signedData.encoded
-            }
-        });
-        FileOutputStream fos = new FileOutputStream(model.fileSigned)
-        doc.saveIncremental(fos);
     }
 }

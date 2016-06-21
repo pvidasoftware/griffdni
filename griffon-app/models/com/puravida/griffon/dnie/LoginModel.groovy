@@ -12,9 +12,9 @@ class LoginModel {
 
     @Bindable String instrucctions = ''
 
-    int count = 0
+    Dnie dnie
 
-    String serialnumber
-    String givenname
-    String surname
+    String getFullname(){
+        "$dnie.givenname, $dnie.surname"
+    }
 }

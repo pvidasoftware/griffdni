@@ -1,6 +1,8 @@
 package com.puravida
 
+import com.puravida.griffon.dnie.LoginController
 import com.puravida.griffon.dnie.LoginModel
+import com.puravida.griffon.dnie.LoginView
 import griffon.core.GriffonApplication
 import griffon.core.ShutdownHandler
 import griffon.core.artifact.GriffonController
@@ -30,14 +32,15 @@ class GriffdniController implements ShutdownHandler{
     }
 
     void login() {
-        withMVC 'login', { loginModel, loginView, loginController ->
-          loginController.doLogin()
-          if (loginModel.serialnumber) {
-              model.nif = loginModel.serialnumber
-              model.name = "$loginModel.givenname, $loginModel.surname"
-              createMVC('rest', [nif:model.nif])
-              createMVC('agreement', [nif:model.nif])
+        withMVC 'login', { LoginModel loginModel, LoginView loginView, LoginController loginController ->
+
+          if ( loginController.doLogin() ) {
+              model.nif = loginModel.dnie.serialnumber
+              model.name = loginModel.fullname
+              createMVC('rest', [ nif: model.nif ])
+              createMVC('agreement', [dnie : loginModel.dnie ])
           }
+
         }
     }
 
@@ -50,8 +53,8 @@ class GriffdniController implements ShutdownHandler{
         }
     }
 
-    void sign() {
-
+    void agreementSigned(){
+        logout()
     }
 
     void exit(){

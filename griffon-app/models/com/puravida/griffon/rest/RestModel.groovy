@@ -16,6 +16,12 @@ class RestModel {
 
     @Bindable foundEnd = false
 
+    String nif
+
+    void mvcGroupInit(Map<String, Object> args) {
+        this.nif = args.nif
+    }
+
     EventList list = new SortedList( new BasicEventList(), { a, b ->
         return a.value <=> b.value
     } as Comparator)

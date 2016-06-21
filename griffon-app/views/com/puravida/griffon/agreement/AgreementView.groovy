@@ -4,6 +4,7 @@ import com.puravida.GriffdniView
 import griffon.core.artifact.GriffonView
 import griffon.metadata.ArtifactProviderFor
 
+import javax.swing.JOptionPane
 import javax.swing.ListSelectionModel
 import javax.swing.SwingConstants
 
@@ -33,12 +34,17 @@ class AgreementView {
             panel( id : 'mainPanel'){
                 borderLayout()
 
-                button id: 'signButton', text: "Sign",
-                        icon : fontAwesomeIcon('fa-pencil'),
-                        verticalTextPosition:SwingConstants.BOTTOM,
-                        horizontalTextPosition:SwingConstants.CENTER,
-                        constraints: BorderLayout.NORTH,
-                        signAgreementAction
+                panel( constraints: BorderLayout.NORTH ){
+                    flowLayout()
+
+                    label text: "Debe firmar el Agreement"
+
+                    button id: 'signButton', text: "Sign",
+                            icon : fontAwesomeIcon('fa-pencil'),
+                            verticalTextPosition:SwingConstants.BOTTOM,
+                            horizontalTextPosition:SwingConstants.CENTER,
+                            signAgreementAction
+                }
 
                 scrollPane id:'pdfPanel', viewportView: pagePanel, constraints: BorderLayout.CENTER
             }
@@ -47,6 +53,7 @@ class AgreementView {
 
     void mvcGroupInit(Map<String, Object> args) {
         parentView.builder.centerPanel.addTab("Agreement", builder.mainPanel)
+        showPage(1)
     }
 
     void mvcGroupDestroy(){
@@ -61,6 +68,14 @@ class AgreementView {
         PDFFile pdfFile = new PDFFile(buf)
         PDFPage page = pdfFile.getPage(pageIndex)
         pagePanel.showPage(page)
+    }
+
+    void showSuccess(){
+        JOptionPane.showMessageDialog(parentView.builder.mainWindow, "Agreement signed")
+    }
+
+    void showError(String err){
+        JOptionPane.showMessageDialog(parentView.builder.mainWindow, "Error : $err")
     }
 
 

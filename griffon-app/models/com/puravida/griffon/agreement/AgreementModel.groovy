@@ -1,5 +1,6 @@
 package com.puravida.griffon.agreement
 
+import com.puravida.griffon.dnie.Dnie
 import griffon.core.artifact.GriffonModel
 import griffon.metadata.ArtifactProviderFor
 
@@ -11,13 +12,17 @@ class AgreementModel {
 
     String file = 'MadridGUG.pdf'
 
-    String nif
+    Dnie dnie
+
+    String getNif(){
+        dnie.serialnumber
+    }
 
     String getFileSigned(){
         "${file}_${nif}.pdf"
     }
 
     void mvcGroupInit(Map<String, Object> args) {
-        this.nif = args.nif
+        this.dnie = args.dnie
     }
 }

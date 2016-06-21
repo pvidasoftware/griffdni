@@ -22,6 +22,8 @@ class RestView {
         builder.with {
             panel( id : 'mainPanel'){
 
+                label text: "Buscando $model.nif"
+
                 button id: 'moreButton', text: "More",
                         icon : fontAwesomeIcon('fa-step-forward'),
                         verticalTextPosition:SwingConstants.BOTTOM,

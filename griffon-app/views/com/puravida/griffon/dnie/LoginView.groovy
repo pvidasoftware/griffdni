@@ -25,7 +25,8 @@ class LoginView {
                     panel(constraints: BorderLayout.CENTER) {
                         borderLayout()
                         label constraints: BorderLayout.NORTH, text: bind { model.instrucctions }
-                        button constraints: BorderLayout.CENTER, id: 'loginButton', text: "Login", readDnieAction
+                        button constraints: BorderLayout.CENTER, id: 'loginButton', text: "Login",
+                                identifyUserAction
                     }
                 }
 
