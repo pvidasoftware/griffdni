@@ -1,7 +1,5 @@
 import com.puravida.MultipleDevicesWindowDisplayHandler
 
-import javax.swing.JFrame
-
 application {
     title = 'Griffon DNIe'
     startupGroups = ['griffdni']

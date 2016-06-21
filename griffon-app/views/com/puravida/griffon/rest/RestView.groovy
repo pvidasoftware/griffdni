@@ -4,11 +4,11 @@ import com.puravida.GriffdniView
 import griffon.core.artifact.GriffonView
 import griffon.metadata.ArtifactProviderFor
 
+import javax.swing.*
+
 /**
  * Created by jorge on 17/06/16.
  */
-import javax.swing.*
-
 @ArtifactProviderFor(GriffonView)
 class RestView {
 

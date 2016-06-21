@@ -1,20 +1,16 @@
 package com.puravida.griffon.agreement
 
 import com.puravida.GriffdniView
+import com.sun.pdfview.PDFFile
+import com.sun.pdfview.PDFPage
+import com.sun.pdfview.PagePanel
 import griffon.core.artifact.GriffonView
 import griffon.metadata.ArtifactProviderFor
 
-import javax.swing.JOptionPane
-import javax.swing.ListSelectionModel
-import javax.swing.SwingConstants
-
-import com.sun.pdfview.PDFFile;
-import com.sun.pdfview.PDFPage;
-import com.sun.pdfview.PagePanel
-
-import java.awt.BorderLayout
+import javax.swing.*
+import java.awt.*
 import java.nio.ByteBuffer
-import java.nio.channels.FileChannel;
+import java.nio.channels.FileChannel
 
 /**
  * Created by jorge on 17/06/16.

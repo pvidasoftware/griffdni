@@ -1,12 +1,11 @@
 package com.puravida.griffon.dnie
 
-import es.gob.jmulticard.ui.passwordcallback.PasswordCallbackManager
 import es.gob.jmulticard.ui.passwordcallback.gui.DnieCallbackHandler
+import griffon.core.artifact.GriffonService
 
 /**
  * Created by jorge on 21/06/16.
  */
-import griffon.core.artifact.GriffonService
 import org.apache.pdfbox.pdmodel.PDDocument
 import org.apache.pdfbox.pdmodel.interactive.digitalsignature.PDSignature
 import org.apache.pdfbox.pdmodel.interactive.digitalsignature.SignatureInterface
