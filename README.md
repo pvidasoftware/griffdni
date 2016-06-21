@@ -1,8 +1,12 @@
 Basic Griffon Swing/Groovy project
 ----------------------------------
 
-You have just created a basic Griffon application with Swing as UI toolkit
-and Groovy as main language. The project has the following file structure
+GriffDnie es una aplicacion basada en Griffon (Swing UI toolkit) y
+Groovy como lenguaje principal. Simplemente es un ejemplo de cómo utilizar este framework en el desarrollo
+de aplicaciones Desktop demostrando cómo utilizar componentes hardware imposibles de usar en una aplicación
+típica web.
+
+La estructura de la aplicación es la típica de una aplicación Griffon:
 
     .
     ├── build.gradle
@@ -26,19 +30,11 @@ and Groovy as main language. The project has the following file structure
             ├── groovy
             └── resources
 
-Simply add your source files to `src/main/groovy`, your test cases to
-`src/test/groovy` and then you will be able to build your project with
+Una vez descargada, simplemente ejecuta los siguientes comandos para ejecutarla.
 
     gradle build
     gradle test
     gradle run
 
-Don't forget to add any extra JAR dependencies to `build.gradle`!
-
-If you prefer building with Maven then execute the following commands
-
-    mvn compile
-    mvn test
-    mvn -Prun
-
-Don't forget to add any extra JAR dependencies to `pom.xml`!
+Para una funcionalidad completa deberás tener un lector de DNIe insertado y configurado para la lectura
+del DNIe. 
