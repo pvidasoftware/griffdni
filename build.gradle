@@ -18,6 +18,10 @@ buildscript {
     }
 }
 
+plugins {
+    id "org.asciidoctor.convert" version "1.5.2"
+}
+
 apply plugin: 'groovy'
 apply plugin: 'org.codehaus.griffon.griffon'
 apply plugin: 'net.nemerosa.versioning'
@@ -155,6 +159,28 @@ tasks.withType(JavaExec) {
 }
 
 
+asciidoctor {
+    attributes 'source-highlighter':'prettify','toc':'left','setanchors':'true'
+    dependsOn 'jar'
+}
+
+
 task genkey << {
     ant.genkey(alias: keyAlias , storepass: keystorePwd, keystore:'keystore',
             dname: 'CN=Ant Group, OU=Jakarta Division, O=Apache.org, C=US') }
+
+task preparePublish(type: Copy){
+    dependsOn 'build'
+    delete 'build/publish'
+    mkdir 'build/publish'
+    from 'build/asciidoc/html5'
+    from 'build/jnlp'
+    into 'build/publish'
+}
+
+
+task publish(type: GradleBuild) {
+    dependsOn 'preparePublish'
+    buildFile = 'publish.gradle'
+    tasks = ['publishGhPages']
+}
