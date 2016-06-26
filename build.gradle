@@ -161,7 +161,7 @@ tasks.withType(JavaExec) {
 
 asciidoctor {
     attributes 'source-highlighter':'prettify','toc':'left','setanchors':'true'
-    dependsOn 'jar'
+    dependsOn 'build'
 }
 
 
@@ -170,7 +170,7 @@ task genkey << {
             dname: 'CN=Ant Group, OU=Jakarta Division, O=Apache.org, C=US') }
 
 task preparePublish(type: Copy){
-    dependsOn 'build'
+    dependsOn 'asciidoctor'
     delete 'build/publish'
     mkdir 'build/publish'
     from 'build/asciidoc/html5'

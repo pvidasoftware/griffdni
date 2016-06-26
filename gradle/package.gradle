@@ -55,8 +55,17 @@ if (!project.hasProperty('keystorePwd')) ext.keystorePwd = ''
 if (keyAlias || keystorePwd) {
     apply plugin: 'de.gliderpilot.jnlp'
     jnlp {
-        useVersions = false
-        usePack200 = false
+        useVersions  false
+        usePack200  false
+        codebase "https://pvidasoftware.github.io/griffdni/"
+        spec '7.0'
+        j2seParams = [version: '7.0+', 'max-heap-size': '256m']
+        signJarAddedManifestEntries = [
+                'Codebase': 'https://pvidasoftware.github.io/griffdni/',
+                'Permissions': 'all-permissions',
+                'Application-Name': "${project.name}"
+        ]
+        signJarRemovedManifestEntries = '(?:Trusted-Only|Trusted-Library|.*-Digest)'
         withXml {
             information {
                 title project.name
@@ -64,6 +73,11 @@ if (keyAlias || keystorePwd) {
             }
             security {
                 'all-permissions'()
+            }
+        }
+        desc = {
+            'application-desc'('main-class': "${project.jnlp.mainClassName}") {
+                argument('-verbose')
             }
         }
         signJarParams = [alias: keyAlias, storepass: keystorePwd, keystore:'keystore']

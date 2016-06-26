@@ -11,5 +11,5 @@ Jorge Aguilera;
 [introduction]
 = Introducción
 
-link:launch.jnlp[pincha aqui]
+link:./launch.jnlp[pincha aqui]
 
