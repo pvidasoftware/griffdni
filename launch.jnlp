@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <jnlp spec='7.0' href='launch.jnlp' version='0.1.0-SNAPSHOT'>
+  <codebase>https://pvidasoftware.github.io/griffdni/</codebase>
   <information>
     <title>griffdni</title>
     <vendor>com.puravida</vendor>
