@@ -13,7 +13,7 @@ apply plugin: 'org.ajoberstar.github-pages'
 githubPages {
   repoUri = 'https://github.com/pvidasoftware/griffdni.git'
   pages {
-     from(file('build/jbake')) {
+     from(file('build/publish')) {
      	into '.'                                    
      }
   }
