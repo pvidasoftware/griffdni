@@ -1,5 +1,7 @@
 package com.puravida.griffon.dnie
 
+import es.gob.jmulticard.jse.provider.DnieProvider
+import es.gob.jmulticard.jse.smartcardio.SmartcardIoConnection
 import es.gob.jmulticard.ui.passwordcallback.gui.DnieCallbackHandler
 import griffon.core.artifact.GriffonService
 
@@ -28,6 +30,8 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.security.KeyStore
 import java.security.PrivateKey
+import java.security.Provider
+import java.security.Security
 import java.security.cert.Certificate
 import java.security.cert.X509Certificate
 
@@ -36,7 +40,18 @@ import java.security.cert.X509Certificate
 class DnieService {
 
 
+    Provider provider
+
+    void loadProvider() {
+        provider = new DnieProvider(new SmartcardIoConnection())
+        Security.addProvider(provider)
+    }
+
+
     Dnie identifyUser(){
+
+        if( !provider )
+            loadProvider()
 
         Dnie ret = new Dnie()
 
@@ -72,6 +87,9 @@ class DnieService {
     }
 
     void signPdf( final Dnie dnie, final File fSource, final File fDestination){
+
+        if( !provider )
+            identifyUser()
 
         Path source = Paths.get(fSource.absolutePath);
         Path destination = Paths.get(fDestination.absolutePath);

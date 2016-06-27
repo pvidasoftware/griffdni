@@ -11,10 +11,6 @@ class Launcher {
 
     static void main(String[] args) throws Exception {
 
-        Provider provider = new DnieProvider(new SmartcardIoConnection())
-        Security.addProvider(provider)
-
-
         SwingGriffonApplication.run(SwingGriffonApplication, args)
     }
 }

@@ -38,3 +38,5 @@ Una vez descargada, simplemente ejecuta los siguientes comandos para ejecutarla.
 
 Para una funcionalidad completa deberás tener un lector de DNIe insertado y configurado para la lectura
 del DNIe. 
+
+Para ejecutar la última versión accede a https://pvidasoftware.github.io/griffdni/
