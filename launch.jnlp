@@ -25,9 +25,9 @@
     <jar href='lib/griffon-glazedlists-core__V1.3.1.jar' />
     <jar href='lib/griffon-glazedlists-core-groovy__V1.3.1.jar' />
     <jar href='lib/griffon-glazedlists-swing-groovy__V1.3.1.jar' />
-    <jar href='lib/griffon-typicons-core__V1.1.0.jar' />
-    <jar href='lib/griffon-typicons-swing__V1.1.0.jar' />
-    <jar href='lib/griffon-typicons-swing-groovy__V1.1.0.jar' />
+    <jar href='lib/griffon-fontawesome-core__V1.4.0.jar' />
+    <jar href='lib/griffon-fontawesome-swing__V1.4.0.jar' />
+    <jar href='lib/griffon-fontawesome-swing-groovy__V1.4.0.jar' />
     <jar href='lib/griffdni__V0.1.0-SNAPSHOT.jar' main='true' />
     <jar href='lib/log4j__V1.2.17.jar' />
     <jar href='lib/slf4j-log4j12__V1.7.18.jar' />
@@ -44,6 +44,7 @@
     <jar href='lib/griffon-monitor-core__V1.1.0.jar' />
     <jar href='lib/groovy-wslite__V1.1.0.jar' />
     <jar href='lib/glazedlists_java15__V1.9.1.jar' />
+    <jar href='lib/font-awesome__V4.4.0.jar' />
     <jar href='lib/aopalliance__V1.0.jar' />
     <jar href='lib/guava__V16.0.1.jar' />
     <jar href='lib/core__V1.54.0.0.jar' />
