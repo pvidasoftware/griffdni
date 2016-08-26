@@ -1,6 +1,6 @@
 = GriffDNIe
 Control de Acceso mediante DNIe
-Jorge Aguilera;
+Jorge Aguilera
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
@@ -21,8 +21,19 @@ Para poder utilizar todas las funcionalidades de la aplicación es necesario un 
 
 link:./launch.jnlp[Ejecutar aplicación]
 
+
+[chapter]
+= Screen Shots
+
+image::images/1.png[]
+image::images/2.png[]
+image::images/3.png[]
+image::images/4.png[]
+image::images/5.png[]
+
+
+[chapter]
 = Código
 
 El código se encuentra en https://github.com/pvidasoftware/griffdni/
-
 

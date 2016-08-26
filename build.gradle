@@ -19,7 +19,7 @@ buildscript {
 }
 
 plugins {
-    id "org.asciidoctor.convert" version "1.5.2"
+    id "org.asciidoctor.convert" version "1.5.3"
 }
 
 apply plugin: 'groovy'
@@ -58,6 +58,8 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'org.kordamp.gradle.stats'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'com.github.kt3k.coveralls'
+
+apply plugin: 'org.asciidoctor.convert'
 
 dependencies {
     compile "org.codehaus.griffon:griffon-guice:${griffon.version}"
@@ -160,10 +162,16 @@ tasks.withType(JavaExec) {
 
 
 asciidoctor {
-    attributes 'source-highlighter':'prettify','toc':'left','setanchors':'true'
+    attributes 'source-highlighter': 'prettify', 'toc': 'left', 'setanchors': 'true'
     dependsOn 'build'
-}
 
+    resources {
+        from('src/docs/screenshot') {
+            include '**'
+        }
+        into './images'
+    }
+}
 
 task genkey << {
     ant.genkey(alias: keyAlias , storepass: keystorePwd, keystore:'keystore',
