@@ -11,4 +11,4 @@ build/
 .classpath
 keystore
 *.pdf
-.gitignore
+gradle.properties
